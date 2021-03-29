@@ -3,26 +3,7 @@ import Header from "./Header";
 import Tasks from "./Tasks";
 import Model from "./Model";
 function App() {
-	const [tasks, setTasks] = useState([
-		{
-			id: 1,
-			text: "fazer alguma coisa",
-			day: "Feb 5th at 2:30",
-			reminder: false,
-		},
-		{
-			id: 2,
-			text: "fazer alguma outra cois",
-			day: "Feb 5th at 1:30",
-			reminder: true,
-		},
-		{
-			id: 3,
-			text: "fazer uma outra coisa",
-			day: "Feb 6th at 2:45",
-			reminder: false,
-		},
-	]);
+	const [tasks, setTasks] = useState([]);
 	const [modalShow, setModalShow] = useState(false);
 
 	const deleteTask = (id) => setTasks(tasks.filter((task) => task.id !== id));
