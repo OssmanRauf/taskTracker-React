@@ -36,14 +36,21 @@ const Form = ({ onAdd }) => {
 					value={text}
 					onChange={(e) => setText(e.target.value)}></input>
 			</div>
+
 			<div className="form-group">
-				<label>Day and time</label>
+				<label htmlFor="example-datetime-local-input">Date and time</label>
 				<input
+					className="form-control"
+					type="datetime-local"
+					onChange={(e) => {
+						setDay(new Date(e.target.value).toString().slice(0, 24));
+					}}></input>
+				{/* <input
 					type="text"
 					className="form-control"
 					placeholder="Add Day and Time"
 					value={day}
-					onChange={(e) => setDay(e.target.value)}></input>
+					onChange={(e) => setDay(e.target.value)}></input> */}
 			</div>
 			<div className="form-check">
 				<input

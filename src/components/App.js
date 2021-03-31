@@ -20,7 +20,7 @@ function App() {
 				task.id === id ? { ...task, reminder: !task.reminder } : task
 			)
 		);
-		console.log(tasks);
+		console.log(tasks.day);
 	};
 	const popupModel = () => {
 		console.log("click");
@@ -28,6 +28,7 @@ function App() {
 		console.log(modalShow);
 	};
 	const addTask = (task) => {
+		console.log(task);
 		const id = Math.floor(Math.random() * 10000) + 1;
 		const newTask = { id, ...task };
 		setTasks([...tasks, newTask]);
@@ -45,7 +46,7 @@ function App() {
 				onAdd={addTask}
 				modalShow={modalShow}
 				onHide={() => setModalShow(false)}
-			/>{" "}
+			/>
 		</div>
 	);
 }
