@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import Tasks from "./Tasks";
 import Model from "./Model";
 
 function App() {
-	const [tasks, setTasks] = useState([]);
+	const [tasks, setTasks] = useState(
+		localStorage.getItem("tasks")
+			? JSON.parse(localStorage.getItem("tasks"))
+			: []
+	);
 	const [modalShow, setModalShow] = useState(false);
-
+	useEffect(() => {
+		localStorage.setItem("tasks", JSON.stringify(tasks));
+	}, [tasks]);
 	const deleteTask = (id) => setTasks(tasks.filter((task) => task.id !== id));
 	const bellEvent = (id) => {
 		setTasks(
