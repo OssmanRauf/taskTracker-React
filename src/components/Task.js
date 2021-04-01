@@ -5,6 +5,7 @@ const Task = ({ task, onDelete, onBell }) => {
 			<h3>
 				{task.text}
 				<div className="icons">
+					{/* check if reminder is active or not and add the proper bell icon */}
 					{task.reminder === true ? (
 						<FaBellSlash
 							className="bell-icon"

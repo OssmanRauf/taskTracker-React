@@ -1,27 +1,24 @@
 import { useState } from "react";
 
 const Form = ({ onAdd }) => {
-	const [text, setText] = useState("");
-	const [day, setDay] = useState("");
-	const [reminder, setReminder] = useState(false);
+	const [task, setTask] = useState({});
 	const [okay, setOkay] = useState(true);
 	const onSubmit = (e) => {
 		e.preventDefault();
-		if (!text) {
+		if (!task.text) {
 			setOkay(false);
 			return;
 		}
-		onAdd({ text, day, reminder });
-		setOkay(true);
-		setText("");
-		setDay("");
-		setReminder(false);
+		onAdd(task);
+		//set the task back to empty object
+		setTask({});
 	};
 
 	return (
 		<form onSubmit={onSubmit}>
+			{/* check if input is not empty */}
 			{!okay ? (
-				<div class="alert alert-danger" role="alert">
+				<div className="alert alert-danger" role="alert">
 					Please add a task!
 				</div>
 			) : (
@@ -33,8 +30,11 @@ const Form = ({ onAdd }) => {
 					type="text"
 					className="form-control"
 					placeholder="Add Task"
-					value={text}
-					onChange={(e) => setText(e.target.value)}></input>
+					value={task.text}
+					onChange={(e) => {
+						const text = e.target.value;
+						setTask({ ...task, text });
+					}}></input>
 			</div>
 
 			<div className="form-group">
@@ -43,21 +43,19 @@ const Form = ({ onAdd }) => {
 					className="form-control"
 					type="datetime-local"
 					onChange={(e) => {
-						setDay(new Date(e.target.value).toString().slice(0, 24));
+						const day = new Date(e.target.value).toString().slice(0, 24);
+						setTask({ ...task, day });
 					}}></input>
-				{/* <input
-					type="text"
-					className="form-control"
-					placeholder="Add Day and Time"
-					value={day}
-					onChange={(e) => setDay(e.target.value)}></input> */}
 			</div>
 			<div className="form-check">
 				<input
 					type="checkbox"
 					className="form-check-input"
-					checked={reminder}
-					onChange={(e) => setReminder(e.currentTarget.checked)}></input>
+					checked={task.reminder}
+					onChange={(e) => {
+						const reminder = e.currentTarget.checked;
+						setTask({ ...task, reminder });
+					}}></input>
 				<label className="form-check-label">Set Reminder</label>
 			</div>
 			<input
